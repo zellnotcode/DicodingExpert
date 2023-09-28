@@ -1,15 +1,22 @@
 version: 2.1
+ 
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@0.2.1
+ 
 jobs:
   build:
-    working_directory: ~/code
-    docker:
-      - image: openjdk:17-jdk-alpine
-    environment:
-      JVM_OPTS: -Xmx3200m
+    executor: android/android
     steps:
       - checkout
+      - restore_cache:
+          key: android-orb-v1-
+       - run:
+           name: Install OpenJDK 17
+           command: |
+             sudo apt-get install openjdk:17-jdk-alpine
+             sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+             sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+             java -version
       - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
@@ -17,9 +24,10 @@ jobs:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
+          key: 'android-orb-v1-{{ epoch }}'
           paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build,gradle" }}
+            - ~/.android/build-cache
+            - ~/.android/cache
       - run:
           name: Run Build
           command: ./gradlew build
