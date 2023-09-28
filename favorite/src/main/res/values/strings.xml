@@ -1,0 +1,4 @@
+<resources>
+    <string name="favorite">Favorite</string>
+    <string name="no_data">No Favorite Data.</string>
+</resources>

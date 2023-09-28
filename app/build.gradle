@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+}
+
+apply from: '../shared_dependencies.gradle'
+
+android {
+    namespace 'com.example.expertsubmission'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.expertsubmission"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    dynamicFeatures = [':favorite']
+}
+
+dependencies {
+    implementation project(":core")
+
+    //NavigationComponent
+    api 'androidx.navigation:navigation-fragment-ktx:2.7.2'
+    api 'androidx.navigation:navigation-ui-ktx:2.7.2'
+    api "androidx.navigation:navigation-dynamic-features-fragment:2.7.2"
+}
