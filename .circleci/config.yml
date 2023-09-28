@@ -1,38 +1,16 @@
 version: 2.1
  
 orbs:
-  android: circleci/android@0.2.1
+  android: circleci/android@1.0.3
  
 jobs:
   build:
-    executor: android/android
+    docker:
+      - image: cimg/android:2023.08
     steps:
       - checkout
       - restore_cache:
           key: android-orb-v1-
-      - run:
-          name: Add Google Cloud SDK GPG Key
-          command: |
-            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-      - run:
-          name: Add Google Cloud SDK Repository
-          command: |
-            echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
-            sudo apt-get update
-      - run:
-          name: Install OpenJDK 17
-          command: |
-            sudo apt-get update
-            sudo apt-get install curl
-            sudo apt-get install -y unzip
-            sudo apt-get install -y software-properties-common
-            sudo apt-get install -y apt-transport-https
-            sudo add-apt-repository ppa:linuxuprising/java
-            sudo apt-get update
-            sudo echo oracle-java17-installer shared/accepted-oracle-license-v1-2 select true | sudo /usr/bin/debconf-set-selections
-            sudo apt-get install -y oracle-java17-installer
-            sudo apt-get install -y oracle-java17-set-default
-            java -version
       - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
