@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: adoptopenjdk/openjdk17:alpine
+      - image: openjdk:17-jdk-alpine
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
