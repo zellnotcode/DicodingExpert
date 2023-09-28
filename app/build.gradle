@@ -10,12 +10,12 @@ apply from: '../shared_dependencies.gradle'
 
 android {
     namespace 'com.example.expertsubmission'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.expertsubmission"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -47,7 +47,7 @@ dependencies {
     implementation project(":core")
 
     //NavigationComponent
-    api 'androidx.navigation:navigation-fragment-ktx:2.6.0'
-    api 'androidx.navigation:navigation-ui-ktx:2.6.0'
-    api "androidx.navigation:navigation-dynamic-features-fragment:2.6.0"
+    api 'androidx.navigation:navigation-fragment-ktx:2.7.3'
+    api 'androidx.navigation:navigation-ui-ktx:2.7.3'
+    api "androidx.navigation:navigation-dynamic-features-fragment:2.7.3"
 }

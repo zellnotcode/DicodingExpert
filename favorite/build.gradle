@@ -9,11 +9,11 @@ apply from: '../shared_dependencies.gradle'
 
 android {
     namespace 'com.example.favorite'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 24
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -43,7 +43,7 @@ dependencies {
     implementation project(":core")
 
     //NavigationComponent
-    api 'androidx.navigation:navigation-fragment-ktx:2.6.0'
-    api 'androidx.navigation:navigation-ui-ktx:2.6.0'
-    api "androidx.navigation:navigation-dynamic-features-fragment:2.6.0"
+    api 'androidx.navigation:navigation-fragment-ktx:2.7.3'
+    api 'androidx.navigation:navigation-ui-ktx:2.7.3'
+    api "androidx.navigation:navigation-dynamic-features-fragment:2.7.3"
 }
